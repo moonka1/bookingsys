@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: bookingsys
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookingsys
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+    show-sql: false
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+  shutdown: graceful
+
+logging:
+  level:
+    root: INFO
+    com.booking: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate: INFO
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/application.log
+
+jwt:
+  secret: mySecretKeyForBookingSystemThatIsLongEnoughToBeSecure1234567890
+  expiration: 86400000
+  refresh-expiration: 604800000
+
+file:
+  upload-dir: uploaded_files/
+  max-size: 52428800
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    path: /v3/api-docs
+  show-login-endpoint: true
+  show-actuator: false
